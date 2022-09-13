@@ -1,0 +1,26 @@
+﻿<Window x:Class="WpfNotes.MainWindow"
+        ignore:note="defines main window"
+        
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        ignore:note="defines main window"
+
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="thisIsIgnored"
+        xmlns:local="clr-namespace:WpfNotes"
+        mc:Ignorable="d ignore"
+        Title="MainWindow" Height="450" Width="800">
+    <!--definese mainWindow class-->
+    <!--XAML is language to create and instatiate .net objects-->
+    <!--All Tags and its atributes will intialize a .net object-->
+    <!--That means every thing i write in xaml has equivalent c# code corresponsing to it-->
+    
+    <!--Xaml is compiled to BAML , binary application markup language-->
+    
+    
+    <Grid>
+        <!-- comment sample -->
+        
+    </Grid>
+</Window>
