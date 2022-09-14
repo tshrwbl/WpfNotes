@@ -1,26 +1,75 @@
-﻿<Window x:Class="WpfNotes.MainWindow"
-        ignore:note="defines main window"
-        
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        ignore:note="defines main window"
+﻿<!--Xaml namespaces URI are unique id for that particular namespace-->
+<!--You can define complete address of namespace and class or can define a URI in xmlns atribute in assembly info-->
 
+<Window x:Class="WpfNotes.MainWindow"
+        ignore:note="defines main window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        ignore:note2="defines main window"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="thisIsIgnored"
         xmlns:local="clr-namespace:WpfNotes"
+        xmlns:local2="clr-namespace:PostSharp.Aspects;assembly=PostSharp"
+        xmlns:control="http://Courseware.com/CoursewareLib"
+        xmlns:customClass="clr-namespace:ObjectElements"
+        xmlns:extLibClass="clr-namespace:PostSharp.Collections;assembly=PostSharp"
         mc:Ignorable="d ignore"
-        Title="MainWindow" Height="450" Width="800">
-    <!--definese mainWindow class-->
-    <!--XAML is language to create and instatiate .net objects-->
-    <!--All Tags and its atributes will intialize a .net object-->
-    <!--That means every thing i write in xaml has equivalent c# code corresponsing to it-->
-    
-    <!--Xaml is compiled to BAML , binary application markup language-->
-    
-    
-    <Grid>
-        <!-- comment sample -->
-        
-    </Grid>
+        Title="Learn WPF "
+        Height="450"
+        Width="800">
+  <!--definese mainWindow class-->
+  <!--XAML is language to create and instatiate .net objects-->
+  <!--All Tags and its atributes will intialize a .net object-->
+  <!--That means every thing i write in xaml has equivalent c# code corresponsing to it-->
+
+  <!--Xaml is compiled to BAML , binary application markup language-->
+  <!--There are two places in Xaml where you can instatiated a objects , Content property and Resourse Propery-->
+
+  <!--contect property can be inferred automatically by xaml, removing window.content tag will also work here-->
+  <!--Here window can only contain one Object in content , we can not add more than one -->
+  <!--Windows content property is object type, But generally gets assgined to UI element-->
+  <Window.Content>
+    <!-- This can be initited here as a .net object <customClass:Tour></customClass:Tour>-->
+
+    <!-- Stack panel has UI Element collection as content property-->
+    <!--It can have multiple UI element initiated in it, but it has to be derived from UIELement-->
+    <StackPanel>
+
+      <!--Error : not a UIElement <customClass:Tour />, But orb can be added as its derived from UIelement-->
+      <customClass:Orb />
+      <Rectangle Fill="{StaticResource RadialCol1}"
+                 Height="42"
+                 Width="32"
+                 Margin="0,0,0,-30" />
+      <Ellipse Height="100"
+               Opacity=".70"
+               Width="150"
+               Margin="10"
+               MouseEnter="Ellipse_MouseEnter"
+               MouseLeave="Ellipse_MouseLeave">
+        <!--Example of Events in wpf-->
+
+        <Ellipse.Fill>
+          <!--Attributes can be set from property attributes or property element-->
+          <RadialGradientBrush>
+            <GradientStop Color="{DynamicResource GradientStopColor1}" />
+            <GradientStop Color="#FFF1FF01"
+                          Offset="1" />
+            <GradientStop Color="#FFD2CCB4"
+                          Offset="0.637" />
+          </RadialGradientBrush>
+        </Ellipse.Fill>
+      </Ellipse>
+
+    </StackPanel>
+
+  </Window.Content>
+
+  <Window.Resources>
+    <!--Resourse is a dictionary collection, Hence any object initiated here must have x:key attribute-->
+    <customClass:Tour x:Key="tourClass" />
+    <Color x:Key="GradientStopColor1">#FFDA463F</Color>
+  </Window.Resources>
+
 </Window>

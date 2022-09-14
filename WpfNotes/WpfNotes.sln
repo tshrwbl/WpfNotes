@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfNotes", "WpfNotes\WpfNotes.csproj", "{2E9602AB-44DE-4100-9E8B-0D99C190E940}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfNotes", "WpfNotes\WpfNotes.csproj", "{2E9602AB-44DE-4100-9E8B-0D99C190E940}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoursewareControls", "CoursewareControls\CoursewareControls.csproj", "{01D927E2-F759-428C-BF73-6CB25586684D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoursewareGraphics", "CoursewareGraphics\CoursewareGraphics.csproj", "{2E173857-A337-40E8-BBE8-3EB07E521843}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{2E9602AB-44DE-4100-9E8B-0D99C190E940}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E9602AB-44DE-4100-9E8B-0D99C190E940}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E9602AB-44DE-4100-9E8B-0D99C190E940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01D927E2-F759-428C-BF73-6CB25586684D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01D927E2-F759-428C-BF73-6CB25586684D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01D927E2-F759-428C-BF73-6CB25586684D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01D927E2-F759-428C-BF73-6CB25586684D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E173857-A337-40E8-BBE8-3EB07E521843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E173857-A337-40E8-BBE8-3EB07E521843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E173857-A337-40E8-BBE8-3EB07E521843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E173857-A337-40E8-BBE8-3EB07E521843}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
