@@ -34,8 +34,12 @@ namespace WpfNotes
 
 
             //add Rect
+            //You can also add content from code too
             //this.Content = stackpnl;  commented for now
             stackpnl.Children.Add(rect);
+
+
+
 
         }
 

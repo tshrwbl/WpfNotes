@@ -10,14 +10,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ignore="thisIsIgnored"
         xmlns:local="clr-namespace:WpfNotes"
-        xmlns:local2="clr-namespace:PostSharp.Aspects;assembly=PostSharp"
         xmlns:control="http://Courseware.com/CoursewareLib"
         xmlns:customClass="clr-namespace:ObjectElements"
-        xmlns:extLibClass="clr-namespace:PostSharp.Collections;assembly=PostSharp"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d ignore"
         Title="Learn WPF "
         Height="450"
-        Width="800">
+        Width="500">
   <!--definese mainWindow class-->
   <!--XAML is language to create and instatiate .net objects-->
   <!--All Tags and its atributes will intialize a .net object-->
@@ -26,50 +25,100 @@
   <!--Xaml is compiled to BAML , binary application markup language-->
   <!--There are two places in Xaml where you can instatiated a objects , Content property and Resourse Propery-->
 
-  <!--contect property can be inferred automatically by xaml, removing window.content tag will also work here-->
-  <!--Here window can only contain one Object in content , we can not add more than one -->
-  <!--Windows content property is object type, But generally gets assgined to UI element-->
-  <Window.Content>
-    <!-- This can be initited here as a .net object <customClass:Tour></customClass:Tour>-->
-
-    <!-- Stack panel has UI Element collection as content property-->
-    <!--It can have multiple UI element initiated in it, but it has to be derived from UIELement-->
-    <StackPanel>
-
-      <!--Error : not a UIElement <customClass:Tour />, But orb can be added as its derived from UIelement-->
-      <customClass:Orb />
-      <Rectangle Fill="{StaticResource RadialCol1}"
-                 Height="42"
-                 Width="32"
-                 Margin="0,0,0,-30" />
-      <Ellipse Height="100"
-               Opacity=".70"
-               Width="150"
-               Margin="10"
-               MouseEnter="Ellipse_MouseEnter"
-               MouseLeave="Ellipse_MouseLeave">
-        <!--Example of Events in wpf-->
-
-        <Ellipse.Fill>
-          <!--Attributes can be set from property attributes or property element-->
-          <RadialGradientBrush>
-            <GradientStop Color="{DynamicResource GradientStopColor1}" />
-            <GradientStop Color="#FFF1FF01"
-                          Offset="1" />
-            <GradientStop Color="#FFD2CCB4"
-                          Offset="0.637" />
-          </RadialGradientBrush>
-        </Ellipse.Fill>
-      </Ellipse>
-
-    </StackPanel>
-
-  </Window.Content>
-
   <Window.Resources>
     <!--Resourse is a dictionary collection, Hence any object initiated here must have x:key attribute-->
     <customClass:Tour x:Key="tourClass" />
     <Color x:Key="GradientStopColor1">#FFDA463F</Color>
   </Window.Resources>
+
+  <!--Content-->
+  <!--Content is way to show information in xaml applicaiton , It has special meaning in xaml -->
+  <!--contect property can be inferred automatically by xaml, removing window.content tag will also work here-->
+  <!--Here window can only contain one Object in content , we can not add more than one -->
+  <!--Windows content property is object type, But generally gets assgined to UI element-->
+
+  <!--<Window.Content>-->
+  <!--Name of content property is defined [ContentProperty("Eg")] attribute-->
+
+  <!-- This can be initited here as a .net object <customClass:Tour></customClass:Tour>-->
+  <!-- Stack panel has UI Element collection as content property-->
+  <!--It can have multiple UI element initiated in it, but it has to be derived from UIELement-->
+  <!--Content Property :  UIElementCollection Children , Same for all panel in WPF-->
+  <StackPanel>
+    <!--Other Panels -->
+    <!-- Canvas : used for absolute positioning of children-->
+    <!-- WrapPanel : stackpanel but horizontal-->
+    <!-- Grid : arrange ui elements in columns and rows -->
+    <!-- DockPanel : docking UI elements left right top left -->
+
+    <!--Error : not a UIElement <customClass:Tour />, But orb can be added as its derived from UIelement-->
+    <customClass:Orb />
+
+    <!--Content Property - Not present for rect-->
+    <Rectangle Fill="{StaticResource RadialCol1}"
+               Height="42"
+               Width="32"
+               Margin="0,0,0,-30" />
+
+    <!--Content Property - Not present for Ellipse-->
+    <Ellipse Height="100"
+             Opacity=".70"
+             Width="150"
+             Margin="10"
+             MouseEnter="Ellipse_MouseEnter"
+             MouseLeave="Ellipse_MouseLeave">
+      <!--Example of Events in wpf-->
+      <Ellipse.Fill>
+        <!--Attributes can be set from property attributes or property element-->
+        <RadialGradientBrush>
+          <GradientStop Color="{DynamicResource GradientStopColor1}" />
+          <GradientStop Color="#FFF1FF01"
+                        Offset="1" />
+          <GradientStop Color="#FFD2CCB4"
+                        Offset="0.637" />
+        </RadialGradientBrush>
+      </Ellipse.Fill>
+    </Ellipse>
+
+    <!-- Content Property : object Content , for all contentControls , Label, Tooltip, CheckBox, RadioButton -->
+    <Button Height="20">
+      <TextBox>
+        Hello there
+      </TextBox>
+    </Button>
+
+    <Label FontSize="9"
+           HorizontalAlignment="Center"
+           Background="{DynamicResource LabelBackground1}">
+      <!--Instaiate datetime, Calls to string on the object -->
+      <system:DateTime>
+        07/19/2022
+      </system:DateTime>
+    </Label>
+    <Label FontSize="9"
+           HorizontalAlignment="Center"
+           Background="{DynamicResource LabelBackground1}">
+
+      <customClass:Tour TourName="Lets go"
+                        City="Mumbai" />
+    </Label>
+
+    <!-- Content property : ItemCollection Items -->
+    <!--Other ItemControls available, Combobox , ListView-->
+    <!--They support Data template and data binding-->
+    <ListBox >
+      <!-- ListBoxItem Derives form contentControl class, it can take 'Object Content' as a content property-->
+      <!-- Same goes for ListViewItem, ComboboxItem-->
+      <ListBoxItem IsSelected="true">
+        Hello There
+      </ListBoxItem>
+      <!--ListBoxItem can aslo be automatically inferred by wpf-->
+      <Rectangle Width="30"
+                 Height="20"
+                 Fill="{DynamicResource RadialCol1}"></Rectangle>
+    </ListBox>
+
+  </StackPanel>
+  <!--</Window.Content> this is inferred automatically , no need to mention this-->
 
 </Window>
