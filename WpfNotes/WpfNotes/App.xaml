@@ -3,22 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WpfNotes"
              StartupUri="MainWindow.xaml">
-  <!--StartUp view for application -->
+    <!--StartUp view for application -->
 
-  <!--Application wide resource dictionary-->
-  <Application.Resources>
-    <RadialGradientBrush x:Key="RadialCol1">
-      <GradientStop Color="#FFF7B5B5" />
-      <GradientStop Color="#FF62EA33"
-                    Offset="0.5" />
-      <GradientStop Color="AliceBlue"
-                    Offset="1" />
-    </RadialGradientBrush>
-    <SolidColorBrush x:Key="SolidColReddish"
-                     Opacity=".5"
-                     Color="#FFD85858" />
-    <SolidColorBrush x:Key="LabelBackground1"
-                     Color="#FF00FF04" />
+    <!--Application wide resource dictionary-->
+    <Application.Resources>
 
-  </Application.Resources>
+        <RadialGradientBrush x:Key="RadialCol1">
+            <GradientStop Color="#FFF7B5B5" />
+            <GradientStop Color="#FF62EA33"
+                          Offset="0.5" />
+            <GradientStop Color="AliceBlue"
+                          Offset="1" />
+        </RadialGradientBrush>
+
+        <SolidColorBrush x:Key="SolidColReddish"
+                         Opacity=".5"
+                         Color="#FFD85858" />
+        <SolidColorBrush x:Key="LabelBackground1"
+                         Color="#FF00FF04" />
+
+    </Application.Resources>
 </Application>

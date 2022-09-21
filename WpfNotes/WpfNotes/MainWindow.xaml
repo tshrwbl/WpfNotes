@@ -1,5 +1,5 @@
 ﻿<!--Xaml namespaces URI are unique id for that particular namespace-->
-<!--You can define complete address of namespace and class or can define a URI in xmlns atribute in assembly info-->
+<!--You can define complete address of namespace and class or can define a URI in xmlns attribute in assembly info-->
 
 <Window x:Class="WpfNotes.MainWindow"
         ignore:note="defines main window"
@@ -17,108 +17,133 @@
         Title="Learn WPF "
         Height="450"
         Width="500">
-  <!--definese mainWindow class-->
-  <!--XAML is language to create and instatiate .net objects-->
-  <!--All Tags and its atributes will intialize a .net object-->
-  <!--That means every thing i write in xaml has equivalent c# code corresponsing to it-->
+    <!--define mainWindow class-->
+    <!--XAML is language to create and instantiate .net objects-->
+    <!--All Tags and its attribute will initialize a .net object-->
+    <!--That means every thing i write in xaml has equivalent c# code corresponding to it-->
 
-  <!--Xaml is compiled to BAML , binary application markup language-->
-  <!--There are two places in Xaml where you can instatiated a objects , Content property and Resourse Propery-->
+    <!--Xaml is compiled to BAML , binary application markup language-->
+    <!--There are two places in Xaml where you can instantiated a objects , Content property and resource property-->
 
-  <Window.Resources>
-    <!--Resourse is a dictionary collection, Hence any object initiated here must have x:key attribute-->
-    <customClass:Tour x:Key="tourClass" />
-    <Color x:Key="GradientStopColor1">#FFDA463F</Color>
-  </Window.Resources>
+    <Window.Resources>
+        <ResourceDictionary>
+            <!--Adding resources from external file-->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResorDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-  <!--Content-->
-  <!--Content is way to show information in xaml applicaiton , It has special meaning in xaml -->
-  <!--contect property can be inferred automatically by xaml, removing window.content tag will also work here-->
-  <!--Here window can only contain one Object in content , we can not add more than one -->
-  <!--Windows content property is object type, But generally gets assgined to UI element-->
+            <!--Resource is a dictionary collection, Hence any object initiated here must have x:key attribute-->
+            <customClass:Tour x:Key="tourClass" />
+            <Color x:Key="GradientStopColor1">#FFDA463F</Color>
+            <RadialGradientBrush x:Key="RadialCol1">
+                <GradientStop Color="#FFFFEA00" />
+                <GradientStop Color="#FF42FF00"
+                              Offset="0.5" />
+                <GradientStop Color="AliceBlue"
+                              Offset="1" />
+            </RadialGradientBrush>
+        </ResourceDictionary>
+       
+    </Window.Resources>
 
-  <!--<Window.Content>-->
-  <!--Name of content property is defined [ContentProperty("Eg")] attribute-->
+    <!--Content-->
+    <!--Content is way to show information in xaml application , It has special meaning in xaml -->
+    <!--content property can be inferred automatically by xaml, removing window.content tag will also work here-->
+    <!--Here window can only contain one Object in content , we can not add more than one -->
+    <!--Windows content property is object type, But generally gets assigned to UI element-->
+    
+    
+    <!--Dependency Properties-->
+    <!--As a developer, you -->
 
-  <!-- This can be initited here as a .net object <customClass:Tour></customClass:Tour>-->
-  <!-- Stack panel has UI Element collection as content property-->
-  <!--It can have multiple UI element initiated in it, but it has to be derived from UIELement-->
-  <!--Content Property :  UIElementCollection Children , Same for all panel in WPF-->
-  <StackPanel>
-    <!--Other Panels -->
-    <!-- Canvas : used for absolute positioning of children-->
-    <!-- WrapPanel : stackpanel but horizontal-->
-    <!-- Grid : arrange ui elements in columns and rows -->
-    <!-- DockPanel : docking UI elements left right top left -->
+        <!--<Window.Content>-->
+    <!--Name of content property is defined [ContentProperty("Eg")] attribute-->
 
-    <!--Error : not a UIElement <customClass:Tour />, But orb can be added as its derived from UIelement-->
-    <customClass:Orb />
+    <!-- This can be initiated here as a .net object <customClass:Tour></customClass:Tour>-->
+    <!-- Stack panel has UI Element collection as content property-->
+    <!--It can have multiple UI element initiated in it, but it has to be derived from UIELement-->
+    <!--Content Property :  UIElementCollection Children , Same for all panel in WPF-->
+    <StackPanel>
+        <!--Other Panels -->
+        <!-- Canvas : used for absolute positioning of children-->
+        <!-- WrapPanel : stackpanel but horizontal-->
+        <!-- Grid : arrange ui elements in columns and rows -->
+        <!-- DockPanel : docking UI elements left right top left -->
 
-    <!--Content Property - Not present for rect-->
-    <Rectangle Fill="{StaticResource RadialCol1}"
-               Height="42"
-               Width="32"
-               Margin="0,0,0,-30" />
+        <!--Error : not a UIElement <customClass:Tour />, But orb can be added as its derived from UIelement-->
+        <customClass:Orb />
 
-    <!--Content Property - Not present for Ellipse-->
-    <Ellipse Height="100"
-             Opacity=".70"
-             Width="150"
-             Margin="10"
-             MouseEnter="Ellipse_MouseEnter"
-             MouseLeave="Ellipse_MouseLeave">
-      <!--Example of Events in wpf-->
-      <Ellipse.Fill>
-        <!--Attributes can be set from property attributes or property element-->
-        <RadialGradientBrush>
-          <GradientStop Color="{DynamicResource GradientStopColor1}" />
-          <GradientStop Color="#FFF1FF01"
-                        Offset="1" />
-          <GradientStop Color="#FFD2CCB4"
-                        Offset="0.637" />
-        </RadialGradientBrush>
-      </Ellipse.Fill>
-    </Ellipse>
+        <!--Content Property - Not present for rect-->
+        <Rectangle Fill="{StaticResource RadialCol1}"
+                   Height="42"
+                   Width="32"
+                   Margin="0,0,0,-30" />
 
-    <!-- Content Property : object Content , for all contentControls , Label, Tooltip, CheckBox, RadioButton -->
-    <Button Height="20">
-      <TextBox>
-        Hello there
-      </TextBox>
-    </Button>
+        <!--Content Property - Not present for Ellipse-->
+        <Ellipse Height="100"
+                 Opacity=".70"
+                 Width="150"
+                 Margin="10"
+                 MouseEnter="Ellipse_MouseEnter"
+                 MouseLeave="Ellipse_MouseLeave">
+            <!--Example of Events in wpf-->
+            <Ellipse.Fill>
+                <!--Attributes can be set from property attributes or property element-->
+                <RadialGradientBrush>
+                    <GradientStop Color="{DynamicResource GradientStopColor1}" />
+                    <GradientStop Color="#FFF1FF01"
+                                  Offset="1" />
+                    <GradientStop Color="#FFD2CCB4"
+                                  Offset="0.637" />
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
 
-    <Label FontSize="9"
-           HorizontalAlignment="Center"
-           Background="{DynamicResource LabelBackground1}">
-      <!--Instaiate datetime, Calls to string on the object -->
-      <system:DateTime>
-        07/19/2022
-      </system:DateTime>
-    </Label>
-    <Label FontSize="9"
-           HorizontalAlignment="Center"
-           Background="{DynamicResource LabelBackground1}">
+        <!-- Content Property : object Content , for all contentControls , Label, Tooltip, CheckBox, RadioButton -->
+        <Button Height="20">
+            <TextBox>
+                Hello there
+            </TextBox>
+        </Button>
 
-      <customClass:Tour TourName="Lets go"
-                        City="Mumbai" />
-    </Label>
+        <Label FontSize="9"
+               HorizontalAlignment="Center"
+               Background="{DynamicResource LabelBackground1}">
+            <!--Instantiate datetime, Calls to string on the object -->
+            <system:DateTime>
+                07/19/2022
+            </system:DateTime>
+        </Label>
+        <Label FontSize="9"
+               HorizontalAlignment="Center"
+               Background="{DynamicResource LabelBackground1}">
 
-    <!-- Content property : ItemCollection Items -->
-    <!--Other ItemControls available, Combobox , ListView-->
-    <!--They support Data template and data binding-->
-    <ListBox >
-      <!-- ListBoxItem Derives form contentControl class, it can take 'Object Content' as a content property-->
-      <!-- Same goes for ListViewItem, ComboboxItem-->
-      <ListBoxItem IsSelected="true">
-        Hello There
-      </ListBoxItem>
-      <!--ListBoxItem can aslo be automatically inferred by wpf-->
-      <Rectangle Width="30"
-                 Height="20"
-                 Fill="{DynamicResource RadialCol1}"></Rectangle>
-    </ListBox>
+            <customClass:Tour TourName="Lets go"
+                              City="Mumbai" />
+        </Label>
 
-  </StackPanel>
-  <!--</Window.Content> this is inferred automatically , no need to mention this-->
+        <!-- Content property : ItemCollection Items -->
+        <!--Other ItemControls available, Combobox , ListView-->
+        <!--They support Data template and data binding-->
+        <ListBox x:Name="ListBoxExm">
+            <ListBox.Resources>
+                <RadialGradientBrush x:Key="RadialCol1">
+                    <GradientStop Color="#FFFFEA00" />
+                </RadialGradientBrush>
+            </ListBox.Resources>
+            <!-- ListBoxItem Derives form contentControl class, it can take 'Object Content' as a content property-->
+            <!-- Same goes for ListViewItem, ComboboxItem-->
+            <ListBoxItem IsSelected="true">
+                Hello There
+            </ListBoxItem>
+            <!--ListBoxItem can alse be automatically inferred by wpf-->
+            <Rectangle Width="30"
+                       Height="20"
+                       Fill="{DynamicResource RadialCol1}" />
+            <!--Sequence of resource lookup, Control -> Window -> App , Hence control resource will be picked up here -->
+        </ListBox>
+
+    </StackPanel>
+    <!--</Window.Content> this is inferred automatically , no need to mention this-->
 
 </Window>
