@@ -21,6 +21,10 @@
     <!--XAML is language to create and instantiate .net objects-->
     <!--All Tags and its attribute will initialize a .net object-->
     <!--That means every thing i write in xaml has equivalent c# code corresponding to it-->
+    <!--Animation, style, Data binding can change value of dependency property, A change notification handled by DS will tell UI textbox to update as per-->
+    <!--Dependency system has strict order of precedence for these changes by DS services -->
+
+    <!--DS services examples , Parent element property value inheritance, styles, Data binding, User template, Data validation , Animation -->
 
     <!--Xaml is compiled to BAML , binary application markup language-->
     <!--There are two places in Xaml where you can instantiated a objects , Content property and resource property-->
@@ -42,8 +46,39 @@
                 <GradientStop Color="AliceBlue"
                               Offset="1" />
             </RadialGradientBrush>
+            <Style TargetType="TextBlock"
+                   x:Key="stTriggerTb">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="Aqua" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="TextBlock"
+                   x:Key="textBoxStyle">
+                <Setter Property="Background"
+                        Value="PaleVioletRed">
+                </Setter>
+            </Style>
+            <!--Parent property will be applied to all textBlocks-->
+            <Style x:Name="AllInheritThis"
+                   TargetType="TextBlock">
+                <Setter Property="Background"
+                        Value="GreenYellow" />
+            </Style>
+            <Storyboard x:Key="AnimationForTextBlock"
+                        RepeatBehavior="Forever"
+                        AutoReverse="True">
+                <DoubleAnimation Storyboard.TargetName="AnimatedTextBlock"
+                                 Storyboard.TargetProperty="FontSize"
+                                 To="24"
+                                 From="18"
+                                 Duration="0:0:2" />
+            </Storyboard>
         </ResourceDictionary>
-       
+
     </Window.Resources>
 
     <!--Content-->
@@ -51,12 +86,14 @@
     <!--content property can be inferred automatically by xaml, removing window.content tag will also work here-->
     <!--Here window can only contain one Object in content , we can not add more than one -->
     <!--Windows content property is object type, But generally gets assigned to UI element-->
-    
-    
-    <!--Dependency Properties-->
-    <!--As a developer, you -->
 
-        <!--<Window.Content>-->
+    <!--Dependency Properties-->
+    <!--As a developer, you need to register property eg FontSize into dependency system -->
+    <!-- Once done, the dependency system takes over. It handles access to the property , memory allocation and change notification-->
+    <!-- Control eg TextBox dont allocate dependency property into its own memory, instead it is allocated on sparse memory handled by dependency system. Even if textBox have 70 property registered, Memory is allocated only when that property is set-->
+    <!-- WPF resolves conflict in writing dependency property by predefined order of precedence-->
+
+    <!--<Window.Content>-->
     <!--Name of content property is defined [ContentProperty("Eg")] attribute-->
 
     <!-- This can be initiated here as a .net object <customClass:Tour></customClass:Tour>-->
@@ -101,7 +138,7 @@
 
         <!-- Content Property : object Content , for all contentControls , Label, Tooltip, CheckBox, RadioButton -->
         <Button Height="20">
-            <TextBox>
+            <TextBox FontWeight="Bold">
                 Hello there
             </TextBox>
         </Button>
@@ -136,13 +173,40 @@
             <ListBoxItem IsSelected="true">
                 Hello There
             </ListBoxItem>
-            <!--ListBoxItem can alse be automatically inferred by wpf-->
+            <!--ListBoxItem can also be automatically inferred by wpf-->
             <Rectangle Width="30"
                        Height="20"
                        Fill="{DynamicResource RadialCol1}" />
             <!--Sequence of resource lookup, Control -> Window -> App , Hence control resource will be picked up here -->
         </ListBox>
-
+        <!--Precedence for conflict 1. animation 2. Local values 3.Templates 4.Triggers 5.Style Setter 6.Property Inheritance 7.Default value-->
+        <!--Dependency property can have default ,local , inherited from parent value. -->
+        <TextBlock Style="{StaticResource textBoxStyle}"
+                   Text="FontWeight Default BG style Setter" />
+        <TextBlock Style="{StaticResource stTriggerTb}"
+                   FontWeight="ExtraBold"
+                   Text="FontWeight Local BG trigger" />
+        <DockPanel  TextElement.FontWeight="Light"
+                    TextBlock.FontSize="20">
+            <!-- These are attach properties-->
+            <!-- We can declare any attach property with dot operator, It will be used at parent or child level only if that class is present-->
+            <TextBlock x:Name="AnimatedTextBlock"
+                       Style="{StaticResource textBoxStyle}"
+                       Background="Aquamarine"
+                       FontSize="7"
+                       DockPanel.Dock="Left"
+                       Grid.Row="0"
+                       ignore:gr="Grid.Row will be registed at DP but will be ignored"
+                       Text="FontWeight Inherited BG local" />
+            <Button Click="Button_Click"
+                    DockPanel.Dock="Right"
+                    HorizontalAlignment="Right"
+                    Margin="10,0,0,0"
+                    Content="Animate" />
+        </DockPanel>
+        <local:CustomControl CustomProp="10" MouseDoubleClick="CustomControl_MouseDoubleClick">
+            
+        </local:CustomControl>
     </StackPanel>
     <!--</Window.Content> this is inferred automatically , no need to mention this-->
 

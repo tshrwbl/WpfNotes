@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -50,8 +51,8 @@ namespace WpfNotes
             ListBoxExm.Items.Add("ADDED FORM CODE");
             ListBoxExm.Items.Add(new Tour() { City = "Pune", TourName = "added from code" });
             ListBoxExm.Items.Add(pnl);
-         
-        
+
+
 
         }
 
@@ -72,6 +73,38 @@ namespace WpfNotes
             {
                 rect.Fill = Brush;
 
+            }
+        }
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Storyboard sb = this.FindResource("AnimationForTextBlock") as Storyboard;
+            var source = DependencyPropertyHelper.GetValueSource(AnimatedTextBlock, TextBox.FontSizeProperty);
+            //source.BaseValueSource for the property name 
+            if (sender is Button btn)
+            {
+                //source.IsAnimated stays true after sb.stop?? 
+                if (btn.Content.ToString() == "Animate")
+                {
+                    sb?.Begin();
+                    btn.Content = "Stop";
+
+                }
+                else
+                {
+                    btn.Content = "Animate";
+                    sb.Stop();
+                }
+
+            }
+        }
+
+        private void CustomControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is CustomControl customControl)
+            {
+                customControl.CustomProp += 1;
             }
         }
     }
