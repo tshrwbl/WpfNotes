@@ -15,7 +15,7 @@
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d ignore"
         Title="Learn WPF "
-        Height="450"
+        Height="600"
         Width="500">
     <!--define mainWindow class-->
     <!--XAML is language to create and instantiate .net objects-->
@@ -77,6 +77,7 @@
                                  From="18"
                                  Duration="0:0:2" />
             </Storyboard>
+            <Thickness x:Key="tbMargin">1</Thickness>
         </ResourceDictionary>
 
     </Window.Resources>
@@ -100,12 +101,20 @@
     <!-- Stack panel has UI Element collection as content property-->
     <!--It can have multiple UI element initiated in it, but it has to be derived from UIELement-->
     <!--Content Property :  UIElementCollection Children , Same for all panel in WPF-->
-    <StackPanel>
+    <StackPanel >
         <!--Other Panels -->
         <!-- Canvas : used for absolute positioning of children-->
         <!-- WrapPanel : stackpanel but horizontal-->
         <!-- Grid : arrange ui elements in columns and rows -->
         <!-- DockPanel : docking UI elements left right top left -->
+
+        <StackPanel.Resources>
+            <Style x:Name="marginSetter"
+                   TargetType="{x:Type Rectangle}">
+                <Setter Property="Margin"
+                        Value="{StaticResource tbMargin}" />
+            </Style>
+        </StackPanel.Resources>
 
         <!--Error : not a UIElement <customClass:Tour />, But orb can be added as its derived from UIelement-->
         <customClass:Orb />
@@ -204,9 +213,40 @@
                     Margin="10,0,0,0"
                     Content="Animate" />
         </DockPanel>
-        <local:CustomControl CustomProp="10" MouseDoubleClick="CustomControl_MouseDoubleClick">
-            
-        </local:CustomControl>
+        <!--Dependency property CustomProp will set new and old value-->
+
+        <local:CustomControl CustomProp="10"
+                             MouseEnter="CustomControl_MouseEnter" />
+
+        <!-- StartBorderLine is custom dependency property which use type converter to convert string into a class-->
+        <!-- You can assign a TypeConverter class derivate to property or class level -->
+        <local:ConverterPract Height="35"
+                              Width="146"
+                              StarBorderLine="0 ,30" />
+
+        <!--    Markup extension,
+        usually parser run type converter for the class/property to get the value
+        This value generation happens at compile time. Markup extension works at runtime.
+        You have to provide {} curly braces to invoke a instance of markup class mentioned. 
+        You have to set all mandatory property from same sentense
+        You can nest markup calls too to get nested returns
+        Common types 
+            StaticResource : get resource from resorDict from key provided
+            DynamicResource : Same as static but updates when resource dictionary item changes value during runtime
+            x:Static  : Gets static value from class
+            x:Type : get type for Type Property eg, TargetType of style
+            Binding : You value from dataSource and assign it to property
+            TemplateBinding : 
+        -->
+        <Slider x:Name="WidthValue"></Slider>
+        <Rectangle  Fill="{StaticResource ResourceKey=OpaqColRed }"
+                    Stroke="{x:Static SystemColors.ControlDarkBrush}"
+                    Height="16" />
+        <Ellipse  Fill="{DynamicResource ResourceKey=SolidColReddish }"
+                    StrokeThickness="4"
+                    Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                    Height="16" />
+
     </StackPanel>
     <!--</Window.Content> this is inferred automatically , no need to mention this-->
 

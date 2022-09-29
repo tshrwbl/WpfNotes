@@ -100,7 +100,7 @@ namespace WpfNotes
             }
         }
 
-        private void CustomControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void CustomControl_MouseEnter(object sender, MouseEventArgs e)
         {
             if (sender is CustomControl customControl)
             {
