@@ -59,8 +59,7 @@
             <Style TargetType="TextBlock"
                    x:Key="textBoxStyle">
                 <Setter Property="Background"
-                        Value="PaleVioletRed">
-                </Setter>
+                        Value="PaleVioletRed" />
             </Style>
             <!--Parent property will be applied to all textBlocks-->
             <Style x:Name="AllInheritThis"
@@ -78,6 +77,7 @@
                                  Duration="0:0:2" />
             </Storyboard>
             <Thickness x:Key="tbMargin">1</Thickness>
+
         </ResourceDictionary>
 
     </Window.Resources>
@@ -91,7 +91,7 @@
     <!--Dependency Properties-->
     <!--As a developer, you need to register property eg FontSize into dependency system -->
     <!-- Once done, the dependency system takes over. It handles access to the property , memory allocation and change notification-->
-    <!-- Control eg TextBox dont allocate dependency property into its own memory, instead it is allocated on sparse memory handled by dependency system. Even if textBox have 70 property registered, Memory is allocated only when that property is set-->
+    <!-- Control eg TextBox don't allocate dependency property into its own memory, instead it is allocated on sparse memory handled by dependency system. Even if textBox have 70 property registered, Memory is allocated only when that property is set-->
     <!-- WPF resolves conflict in writing dependency property by predefined order of precedence-->
 
     <!--<Window.Content>-->
@@ -101,7 +101,7 @@
     <!-- Stack panel has UI Element collection as content property-->
     <!--It can have multiple UI element initiated in it, but it has to be derived from UIELement-->
     <!--Content Property :  UIElementCollection Children , Same for all panel in WPF-->
-    <StackPanel >
+    <StackPanel>
         <!--Other Panels -->
         <!-- Canvas : used for absolute positioning of children-->
         <!-- WrapPanel : stackpanel but horizontal-->
@@ -222,13 +222,13 @@
         <!-- You can assign a TypeConverter class derivate to property or class level -->
         <local:ConverterPract Height="35"
                               Width="146"
-                              StarBorderLine="0 ,30" />
+                              StarBorderLine="10, 3" />
 
         <!--    Markup extension,
         usually parser run type converter for the class/property to get the value
         This value generation happens at compile time. Markup extension works at runtime.
         You have to provide {} curly braces to invoke a instance of markup class mentioned. 
-        You have to set all mandatory property from same sentense
+        You have to set all mandatory property from same sentence
         You can nest markup calls too to get nested returns
         Common types 
             StaticResource : get resource from resorDict from key provided
@@ -238,14 +238,34 @@
             Binding : You value from dataSource and assign it to property
             TemplateBinding : 
         -->
-        <Slider x:Name="WidthValue"></Slider>
+        <Slider x:Name="WidthValue"
+                Value="100"></Slider>
         <Rectangle  Fill="{StaticResource ResourceKey=OpaqColRed }"
                     Stroke="{x:Static SystemColors.ControlDarkBrush}"
                     Height="16" />
         <Ellipse  Fill="{DynamicResource ResourceKey=SolidColReddish }"
-                    StrokeThickness="4"
-                    Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
-                    Height="16" />
+                  StrokeThickness="4"
+                  Width="{Binding ElementName=WidthValue, Path=Value}"
+                  Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                  Height="16" />
+
+        <WrapPanel>
+            <WrapPanel.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Background"
+                            Value="AntiqueWhite"></Setter>
+                    <Setter Property="Margin"
+                            Value="5"></Setter>
+                </Style>
+            </WrapPanel.Resources>
+
+            <Label Content="{local:RollTheDiceExtention 0}" />
+            <Label Content="{local:RollTheDiceExtention 1}" />
+            <Label Content="{local:RollTheDiceExtention 2,ShowDiceTotal=False}" />
+            <Label Content="{local:RollTheDiceExtention 3}" />
+            <Label Content="{local:RollTheDiceExtention 4 , ShowDiceTotal=False}" />
+            <Label Content="{local:RollTheDiceExtention 5 , ShowDiceTotal=False}" />
+        </WrapPanel>
 
     </StackPanel>
     <!--</Window.Content> this is inferred automatically , no need to mention this-->

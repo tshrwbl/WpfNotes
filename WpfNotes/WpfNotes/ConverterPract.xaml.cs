@@ -30,7 +30,9 @@ namespace WpfNotes
 
         public static readonly DependencyProperty StarBorderLineProperty;
 
-        //TypeConverter at method level takes precedence over class level attribute
+        //TypeConverter at method level takes precedence over class (Borderline) level attribute
+        //Some time you need more than what basic type converter can do at method level
+        //Use Method attributed type converter in that case. 
         [TypeConverter(typeof(BorderlineConverterCopy))]
         public Borderline StarBorderLine 
         {
@@ -93,6 +95,7 @@ namespace WpfNotes
         }
     }
 
+    //Typeconverter at class level
     public class BorderlineConverter : TypeConverter
     {
         public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
@@ -194,7 +197,7 @@ namespace WpfNotes
             {
                 result = true;
             }
-            return true;
+            return result;
         }
 
         public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
